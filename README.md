@@ -18,7 +18,7 @@ Proporciona una interfaz de usuario intuitiva y funcional para que los usuarios 
 - **API de Platzi**: Una API que proporciona datos de productos y categorías.
 - **Netlify**: Una plataforma de alojamiento y despliegue de sitios web.
 
-##Despliegue
+## Despliegue
 
 El proyecto ha sido desplegado en Netlify. Puedes acceder a él haciendo clic en el siguiente enlace: [E-commerce](https://quiet-choux-5e6f73.netlify.app/).
 
