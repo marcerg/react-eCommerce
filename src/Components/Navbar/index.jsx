@@ -6,6 +6,12 @@ import './Navbar.css';
 
 function Navbar() {
     const context = useContext(ShoppingCartContext);
+
+    const handleSignOut = () => {
+        const stringifiedSignOut = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifiedSignOut)
+        context.setSignOut(true)
+    }
     return(
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-neutral-700">
             <ul className="flex items-center gap-3 text-white">
@@ -86,8 +92,9 @@ function Navbar() {
                     <NavLink to='/sign-in'
                       className={({ isActive, isPending }) =>
                       isPending ? "pending" : isActive ? "active" : ""
-                    }>
-                        Sign In
+                    }
+                    onClick={()=> handleSignOut()}>
+                        Sign out
                     </NavLink>
                 </li>
                 <li className='flex item-center'>
