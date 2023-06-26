@@ -6,11 +6,60 @@ import './Navbar.css';
 
 function Navbar() {
     const context = useContext(ShoppingCartContext);
+    
+    //Sign Out
+    const signOut = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOut)
+    const isUserSignOut = context.signOut || parsedSignOut
 
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
         localStorage.setItem('sign-out', stringifiedSignOut)
         context.setSignOut(true)
+    }
+    const renderView = () => {
+        if (isUserSignOut) {
+            return (
+                <li className='hover:text-green-700'>
+                <NavLink to='/sign-in'
+                  className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""
+                }
+                onClick={()=> handleSignOut()}>
+                    Sign out
+                </NavLink>
+            </li>
+            )
+        } else {
+            return (
+                <>
+                <li className='hover:text-green-600'>
+                    marcelo@mail.com
+                </li>
+                <li className='hover:text-green-700'>
+                    <NavLink to='/my-orders'
+                      className={({ isActive, isPending }) =>
+                      isPending ? "pending" : isActive ? "active" : ""
+                    }>
+                        My Orders
+                    </NavLink>
+                </li>
+                <li className='hover:text-green-700'>
+                    <NavLink to='/sign-in'
+                      className={({ isActive, isPending }) =>
+                      isPending ? "pending" : isActive ? "active" : ""
+                    }
+                    onClick={()=> handleSignOut()}>
+                        Sign out
+                    </NavLink>
+                </li>
+                <li className='flex item-center'>
+                    <ShoppingBagIcon className="h-6 w-6 text-white hover:text-green-700" /> 
+                    <div>{context.cartProducts.length}</div>
+                </li>
+                </>
+            )
+        }
     }
     return(
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-neutral-700">
@@ -77,26 +126,7 @@ function Navbar() {
                 </li>
             </ul>
             <ul className="flex items-center gap-3 text-white">
-                <li className='hover:text-green-600'>
-                    marcelo@mail.com
-                </li>
-                <li className='hover:text-green-700'>
-                    <NavLink to='/my-orders'
-                      className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "active" : ""
-                    }>
-                        My Orders
-                    </NavLink>
-                </li>
-                <li className='hover:text-green-700'>
-                    <NavLink to='/sign-in'
-                      className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "active" : ""
-                    }
-                    onClick={()=> handleSignOut()}>
-                        Sign out
-                    </NavLink>
-                </li>
+                {renderView()}
                 <li className='flex item-center'>
                     <ShoppingBagIcon className="h-6 w-6 text-white hover:text-green-700" /> 
                     <div>{context.cartProducts.length}</div>
