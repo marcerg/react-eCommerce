@@ -34,7 +34,7 @@ function Home() {
           <input 
             type="text" 
             placeholder="Search a products" 
-            className="rounded-lg border border-green-700 w-80 p-4 mb-4 focus: outline-none" 
+            className="rounded-lg border border-green-700 w-80 p-4 mb-4 focus: outline-none bg-zinc-800" 
             onChange={(event) => context.setSearchByTitle(event.target.value)}/>
           <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg bg-zinc-950">
           { renderView() }
