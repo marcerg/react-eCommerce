@@ -53,10 +53,6 @@ function Navbar() {
                         Sign out
                     </NavLink>
                 </li>
-                <li className='flex item-center'>
-                    <ShoppingBagIcon className="h-6 w-6 text-white hover:text-green-700" /> 
-                    <div>{context.cartProducts.length}</div>
-                </li>
                 </>
             )
         }
