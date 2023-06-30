@@ -25,14 +25,14 @@ function SignIn() {
       return <Navigate remplace to={'/'}/>
     }
 
-    const createAnAccount = () => {
+    const editAccount = () => {
       const formData = new FormData(form.current)
-      const data ={
+      const data = {
         name: formData.get('name'),
         email: formData.get('email'),
         password: formData.get('password')
       }
-
+  
     //Create Account
     const stringifiedAccount = JSON.stringify(data)
     localStorage.setItem('account', stringifiedAccount)
@@ -66,7 +66,7 @@ function SignIn() {
           <a className="font-light text-xs underline underline-offset-4" href="/">Forgot my password</a>
         </div>
         <button
-        className="border border-green-700 disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3"
+        className="text-white border rounded-lg mt-6 py-3"
         onClick={()=> setView('create-user-info')}
         disabled={hasUserAnAccount}>
           Sign up
@@ -74,48 +74,50 @@ function SignIn() {
         </div>
       )
     }
-    const renderCreateUserInfo = () => {
-        return(
-          <form ref={form} className='flex flex-col gap-4 w-80'>
-            <div className="flex flex-col gap-1 text-white">
-              <label htmlFor="name" className="font-light text-sm">Your name:</label>
-              <input 
-                type="text" 
-                name="name" 
-                id="name"
-                defaultValue={parsedAccount?.name}
-                placeholder="Peter"
-                className="border border-green-700 placeholder:font-light placeholder:text-sm placeholder:text-zinc-400 focus:outline-none py-2 px-4 bg-zinc-700 rounded-lg" />
-            </div>
-            <div className="flex flex-col gap-1 text-white">
-              <label htmlFor="email" className="font-ligth text-sm">Your email:</label>
-              <input 
-                type="text" 
-                name="email" 
-                id="email"
-                defaultValue={parsedAccount?.email}
-                placeholder="peter@email.com"
-                className="border border-green-700 placeholder:font-light placeholder:text-sm placeholder:text-zinc-400 focus:outline-none py-2 px-4 bg-zinc-700 rounded-lg" />
-            </div>
-            <div className="flex flex-col gap-1 text-white">
-            <label htmlFor="password" className="font-ligth text-sm">Your password:</label>
-              <input 
-                type="text" 
-                name="password" 
-                id="password"
-                defaultValue={parsedAccount?.password}
-                placeholder="*********"
-                className="border border-green-700 placeholder:font-light placeholder:text-sm placeholder:text-zinc-400 focus:outline-none py-2 px-4 bg-zinc-700 rounded-lg" />
-            </div>
-            <Link to='/'>
-              <button 
-                className="bg-green-700 text-white w-full rounder-lg py-3"
-                onClick={() => createAnAccount()}>
-                Create
-              </button>
-            </Link>
-          </form>
-        )
+    const renderEditUserInfo = () => {
+      return (
+        <form>
+
+          <div className='flex flex-col gap-1'>
+            <label htmlFor="name" className='font-light text-sm'>Your name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              defaultValue={parsedAccount.name}
+              placeholder="Peter"
+              className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+              />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <label htmlFor="email" className='font-light text-sm'>Your email:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              defaultValue={parsedAccount.email}
+              placeholder="hi@helloworld.com"
+              className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+              />
+          </div>
+          <div className='flex flex-col gap-1'>
+            <label htmlFor="password" className='font-light text-sm'>Your password:</label>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              defaultValue={parsedAccount.password}
+              placeholder="******"
+              className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4'
+              />
+          </div>
+          <button
+            className='bg-black text-white w-full rounded-lg py-3'
+            onClick={() => {setView('user-info'), editAccount()}}>
+            Edit
+          </button>
+              </form>
+      )
     }
 
     const renderView = () => view === 'create-user-info' ? renderCreateUserInfo(): renderLogIn()
