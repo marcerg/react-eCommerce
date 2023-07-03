@@ -74,7 +74,7 @@ function SignIn() {
         </div>
       )
     }
-    const renderEditUserInfo = () => {
+    const renderCreateUserInfo = () => {
       return (
         <form>
 
